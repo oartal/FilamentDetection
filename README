@@ -14,5 +14,37 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+Basic Use:
+
+To start, open MATLAB and add the downloaded code
+
+e.g.
+
+Add the Toolboxs needed for FDT
+>start 
+
+run the asissted method
+>fdt_assisted
+
+run the automatic method
+>fdt_automatic
+
+discriminates a filament from the persistence criterium: days and tolerance
+radius
+>fdt_persistence
 
 
+If you want to perform other tests modify the file fdt_param.m
+and execute the corresponding script again.
+
+The following files should not be modified for the proper functioning of the code
+fdt_readroms
+fdt_filaments
+fdt_haversine
+
+
+
+
+Contact:
+
+For more information or suggestions, please contact Osvaldo Artal (oartal@dgeo.udec.cl)
