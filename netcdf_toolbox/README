@@ -1,0 +1,65 @@
+Please note that while the MathWorks now supports netCDF, it does not
+support the NetCDF Toolbox, so please do not ask them any questions
+about it.  For that matter, I do not support it either since I did
+not write it.  If you use it, you are completely on your own.
+
+
+SETTING YOUR PATH ======================================================
+
+First, a word of warning.  If you use the NetCDF Toolbox, you will not 
+be able to easily access the help for MATLAB's native netcdf package in 
+R2008b and later.  "help netcdf" will always go to the NetCDF Toolbox,
+even if it comes last on your path.  An annoying workaround is to use
+"help netcdf/Contents", but a better solution is to rely on doc, i.e.
+"doc netcdf".
+
+In order to use the netcdf toolbox, you should add the following 
+paths to your matlab path.
+
+addpath /path/to/wherever/you/unpacked/this/netcdf_toolbox/netcdf 
+addpath /path/to/wherever/you/unpacked/this/netcdf_toolbox/netcdf/nctype
+addpath /path/to/wherever/you/unpacked/this/netcdf_toolbox/netcdf/ncutility
+
+or if on Windows, 
+
+addpath C:\path\to\wherever\you\installed\this\netcdf 
+addpath C:\gpath\to\wherever\you\installed\this\netcdf\nctype
+addpath C:\path\to\wherever\you\installed\this\netcdf\ncutility
+
+It could reside on another drive as well.
+
+And remember to remove any previous version of the netcdf toolbox from
+your path as well.
+
+
+
+Windows Users Take Note ===================================================
+
+If you are using R2008a or below, then read the next few blurbs.
+
+The "netcdf.dll" should be somewhere on your windows system path, BUT
+NOT on your matlab path.  If you type
+
+    >> which ( 'netcdf', '-all' );
+
+from the matlab command line, you should only see one m-file, and you
+shouldn't see the DLL at atll.
+
+If you are using R2008b (or peeking into the future, R2009a or higher), 
+then don't bother.  You don't have to worry about the netcdf.dll anymore.  
+Woo-hoo!
+
+
+
+AUTOSCALING ===============================================================
+
+If you wish to automatically scale your data and have fill values 
+replaced by NaNs, you should define a global structure called 
+"nctbx_options" as follows:
+
+    >> global nctbx_options;
+    >> nctbx_options.theAutoscale = 1;
+    >> nctbx_options.theAutoNaN = 1;
+
+You can place this code in your startup.m if you don't want to 
+continually have to do this upon starting matlab.
