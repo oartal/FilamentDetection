@@ -18,8 +18,14 @@ function fdt_plot_automatic(output,grdname)
 % clc
 % grdname = 'INPUT/roms_his_Y8M1.nc';
 % output = 'OUTPUT/roms_automatic_736068.486.mat';
+%
+% e.g. fdt_plot_automatic('OUTPUT/roms_automatic_736068.486.mat','INPUT/roms_his_Y8M1.nc')
+%
 
-
+%
+% to use with Octave uncomment the following line
+%graphics_toolkit("gnuplot");
+%
 
 [lon,lat,mask] = fdt_readroms(grdname,'grd');
 dif2 = 3; % Value for calculate the gradients.
