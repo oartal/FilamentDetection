@@ -27,13 +27,14 @@ function [lon lat mask time temp I] = fdt_readroms(filename,filetype)
 %  [lon lat mask temp] = fdt_readroms('Example/roms_avg_Y8M1.nc');
 %  
 % AUTHOR
-%   Osvaldo Artal A.  oartal@oasc.cl
+%   Osvaldo Artal A.  osvaldo.artal@ifop.cl
 %
 % DATE LAST MODIFIED
 %
 %   May, 31. 2011
 %   Nov, 27, 2012 (change version of netcdf toolbox)
 %   Dec, 17, 2013 (Add filetype)
+%   Jun, 04. 2018 (Add case grd)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -57,6 +58,24 @@ switch filetype
         temp = squeeze(nc{'temp'}(2:end,ns,:,:));
         u = u2rho_3d(squeeze(nc{'u'}(2:end,ns,:,:)));
         v = v2rho_3d(squeeze(nc{'v'}(2:end,ns,:,:)));
+    case 'grd'
+        xspon = nc.x_sponge(:);
+        close(nc)
+        gradespon = (xspon/1000)/111;
+        dlon = lon(1,2)-lon(1,1);
+        dlat = lat(2,1)-lat(1,1);
+        x_remove = numel(0:dlon:gradespon);
+        y_remove = numel(0:dlat:gradespon);
+        lon(1:x_remove,:)=[];
+        lon(:,1:y_remove)=[];
+        lon(:,end-y_remove:end)=[];
+        lat(1:x_remove,:)=[];
+        lat(:,1:y_remove)=[];
+        lat(:,end-y_remove:end)=[];
+        mask(1:x_remove,:)=[];
+        mask(:,1:y_remove)=[];
+        mask(:,end-y_remove:end)=[];
+        return    
 end
 
 xspon = nc.x_sponge(:);
