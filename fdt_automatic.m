@@ -45,7 +45,9 @@ mm = str2num(filename(ab+1:ac-1));
 
 [lon,lat,coast,time,temp,I] = fdt_readroms(filename,filetype);
 
-D = bwdist(~coast);   % Distance from each pixel to the coast
+D = bwdist(~coast);   % Distance from each pixel to the coast, using a inverted landmask (0 for water, 1 for land)
+                      % bwdist calculated the Euclidian distance between each pixel and the nearest non-zero pixel
+                      % in this case, the coastline.
 
 switch autmeth
     case {'SST'}
