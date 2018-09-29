@@ -1,0 +1,11 @@
+1)
+The code can present a large sensitivity on the results, 
+depending on the choosen parameters and the filament detection criteria
+(magnitude of velocity vs sst gradient). Compare your results from
+the automatic method with your own selection of filaments using
+the manual selection method (GUI for assisted selection).
+
+2)
+Intense coastal currents can be incorrectly identified as filaments. 
+A solution for this issue is being developed.
+
