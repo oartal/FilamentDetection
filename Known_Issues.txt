@@ -1,11 +1,16 @@
-1)
+1) Sensitivity to Parameters
+
 The code can present a large sensitivity on the results, 
 depending on the choosen parameters and the filament detection criteria
 (magnitude of velocity vs sst gradient). Compare your results from
 the automatic method with your own selection of filaments using
 the manual selection method (GUI for assisted selection).
 
-2)
+2) Problems with Coastal Currents
+
 Intense coastal currents can be incorrectly identified as filaments. 
 A solution for this issue is being developed.
 
+3) Asumption of Eastern Boundary
+
+Distance between all  pixels points and the coast are calculated using the bwdist function of the images toolbox (see fdt_automatic.m file in github site, ~L48). This function (https://la.mathworks.com/help/images/ref/bwdist.html ) computes the Euclidian distance between each point and the nearest non-zero. Here we apply {\bf bwdist} to the inverted the landsea mask matrix, thus landpoints become 1's and water points become 0's. The code then looks, in each extracted filament, for the point that is farthest to the right side (pos0, ~L52 in fdt_filaments function). If that point's distance is greater than the specified maximum distance to the coast, the filament is discarded. Thus, the way we select the initial point does assume a coastline on the eastern side of the domain. A more general way of selecting the distance to the coast and the origin of the filaments is in the works.
